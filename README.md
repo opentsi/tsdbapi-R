@@ -14,19 +14,19 @@ The package is not yet published on CRAN.
 ## Basic Usage
 
 Use the function `read_ts` to read time series from the KOF time series database. The code below reads the time series
-with the keys **ch.kof.globalbaro.coincident** and **ch.kof.globalbaro.leading** and returns them as a list of objects of class **ts**.
+with the keys *ch.kof.globalbaro.coincident* and *ch.kof.globalbaro.leading* and returns them as a list of objects of class **ts**.
 ``` r
 tsdbapi::read_ts(ts_keys=c("ch.kof.globalbaro.coincident","ch.kof.globalbaro.leading"))
 ```
 
 ### Authorization
 
-When running the code above, you will be redirected to KOF's identity provider (Keycloak), where you have to log in with your KOF credentials (unless you are already logged in). If you do not have a KOF account, you can still access the public time series in the KOF time series database by setting the access_type to **public**:
+When running the code above, you will be redirected to KOF's identity provider (Keycloak), where you have to log in with your KOF credentials (unless you are already logged in). If you do not have a KOF account, you can still access the public time series in the KOF time series database by setting the access_type to *public*:
 ``` r
 tsdbapi::set_config(access_type = "public")
 tsdbapi::read_ts(ts_keys="ch.kof.barometer")
 ```
-The time series **ch.kof.barometer** is a public time series.
+The time series *ch.kof.barometer* is a public time series.
 
 If you want to avoid user login, for example in a non-interactive session, you must use an offline token. An offline token is a refresh token that does not expire and can be used to retrieve access tokens. Request an offline token with:
 ``` r
@@ -58,7 +58,7 @@ The release information, including the release time, of the most recent time ser
 ``` r
 tsdbapi::read_ts_release(ts_keys="ch.kof.barometer")
 ```
-Use the `valid_on` parameter to specify a different vintage. For users with the role **extern**, only vintages that have been released are visible. However, the release information of future, yet to be released time series vintages can be read with
+Use the `valid_on` parameter to specify a different vintage. For users with the role *extern*, only vintages that have been released are visible. However, the release information of future, yet to be released time series vintages can be read with
 ``` r
 tsdbapi::read_ts_release_future(ts_keys="ch.kof.barometer")
 ```
@@ -82,7 +82,7 @@ You can list all collections you are allowed to see with
 ``` r
 tsdbapi::list_collections()
 ```
-For users with the role **extern**, the includes all collections owned by the user himself and by the user **public**.
+For users with the role *extern*, the includes all collections owned by the user himself and by the user *public*.
 
 ### Metadata
 
