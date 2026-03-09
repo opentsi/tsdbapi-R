@@ -172,9 +172,9 @@ delete_user_quota <- function(username) {
 
 #' Create user API key
 #' 
-#  Create an API key for a user for programmatic access.
-#  Any previously created API key for the user will be overwritten and therefore invalidated.
-#  Store the newly created API key securely because it cannot be retrieved later.
+#' Create an API key for a user for programmatic access.
+#' Any previously created API key for the user will be overwritten and therefore invalidated.
+#' Store the newly created API key securely because it cannot be retrieved later.
 #' 
 #' @inheritParams param_defs
 #' @family user management functions

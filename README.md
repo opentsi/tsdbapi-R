@@ -28,7 +28,7 @@ tsdbapi::read_ts(ts_keys="ch.kof.barometer")
 ```
 The time series *ch.kof.barometer* is a public time series.
 
-For **programmatic access** without user log in, for example in a non-interactive session, you must use an API key. Create an API key with:
+For **programmatic access** without user log in, for example in a non-interactive session, you must use an API key. Create an API key for your user with:
 ``` r
 api_key <- tsdbapi::create_user_api_key()
 print(api_key)

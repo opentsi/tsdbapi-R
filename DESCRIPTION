@@ -1,5 +1,5 @@
 Package: tsdbapi
-Version: 0.7.0
+Version: 0.7.1
 Title: Interact with the KOF Time Series Database API
 Description: The **tsdbapi** package is an R wrapper for the [KOF Time Series DB API](https://tsdb-api.kof.ethz.ch/v2/docs). The functionality of the package includes reading time series data, metadata and release information from the KOF time series database.
 Authors@R: person("Oliver", "Müller", email = "omueller@kof.ethz.ch", role = "cre")
