@@ -141,7 +141,7 @@ read_dataset_ts_history <- function(
     httr2::req_perform()
   
   data <- jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
-  names(data) <- purrr::map_chr(data, ~paste0(.x$ts_key, "_", .x$validity))
+  names(data) <- purrr::map_chr(data, ~paste0(.x$ts_key, "_", .x$vintage_date))
   lapply(data, json_to_ts)
 }
 
