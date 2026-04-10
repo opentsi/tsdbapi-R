@@ -27,5 +27,6 @@
 #' @param overwrite If TRUE, the existing metadata is replaced completely. If FALSE (default), new fields are added and existing fields are updated.
 #' @param skip_check If FALSE (default), the user must manually confirm the deletion of time series.
 #' @param subscription_start_date Start date of the user subscription
+#' @param vintage_date character string containing a YYYY-MM-DD formatted date to indicate the date that this particular vintage refers to.
 #' @name param_defs
 NULL
