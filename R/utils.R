@@ -170,8 +170,9 @@ to_bool_query_param <- function(arg) {
 }
 
 json_to_ts <- function(data) {
-  res <- xts::xts(data$value, order.by = as.Date(data$time), frequency = data$frequency)
-  if(data$frequency) {
+  freq <- data$frequency
+  res <- xts::xts(data$value, order.by = as.Date(data$time), frequency = freq)
+  if (!is.null(freq) && isTRUE(freq > 0)) {
     tsbox::ts_ts(res)
   } else {
     res
