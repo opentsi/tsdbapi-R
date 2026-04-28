@@ -87,7 +87,8 @@ read_collection_ts <- function(
   
   data <- jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
   names(data) <- purrr::map_chr(data, "ts_key")
-  lapply(data, json_to_ts)
+  # lapply(data, json_to_ts)
+  return(data)
 }
 
 #' Read collection time series metadata
