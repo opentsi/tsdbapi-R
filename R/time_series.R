@@ -47,21 +47,26 @@ read_ts_history <- function(
     ts_keys,
     valid_from = NULL,
     valid_to = Sys.Date(),
-    ignore_missing = F) {
-  
-  url <- paste0(ts_base_url(), "history")
-  
-  res <- req_base(url) |>
-    httr2::req_url_query(
-      df="Y-m-d",
-      mime="json",
-      keys=paste0(ts_keys, collapse = ","),
-      valid_from=as.character(valid_from),
-      valid_to=as.character(valid_to),
-      ignore_missing=to_bool_query_param(ignore_missing)) |>
-    httr2::req_perform()
+    ignore_missing = F,
+    batch_size = 100) {
 
-  data <- jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
+  url <- paste0(ts_base_url(), "history")
+
+  fetch_batch <- function(keys_batch) {
+    res <- req_base(url) |>
+      httr2::req_url_query(
+        df="Y-m-d",
+        mime="json",
+        keys=paste0(keys_batch, collapse = ","),
+        valid_from=as.character(valid_from),
+        valid_to=as.character(valid_to),
+        ignore_missing=to_bool_query_param(ignore_missing)) |>
+      httr2::req_perform()
+    jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
+  }
+
+  batches <- split(ts_keys, ceiling(seq_along(ts_keys) / batch_size))
+  data <- unlist(lapply(batches, fetch_batch), recursive = FALSE)
   names(data) <- purrr::map_chr(data, ~paste0(.x$ts_key, "_", stringr::str_replace_all(.x$vintage_date, "-", "")))
   lapply(data, json_to_ts)
 }
