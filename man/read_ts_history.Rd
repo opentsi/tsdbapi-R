@@ -8,7 +8,8 @@ read_ts_history(
   ts_keys,
   valid_from = NULL,
   valid_to = Sys.Date(),
-  ignore_missing = F
+  ignore_missing = F,
+  batch_size = 100
 )
 }
 \arguments{
