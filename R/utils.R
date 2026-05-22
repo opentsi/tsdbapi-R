@@ -169,13 +169,15 @@ to_bool_query_param <- function(arg) {
   if(arg) "true" else ""
 }
 
+date_to_time <- function(date) {
+  lubridate::year(date) + (lubridate::month(date) - 1) / 12
+}
+
 json_to_ts <- function(data) {
-  freq <- data$frequency
-  res <- xts::xts(data$value, order.by = as.Date(data$time), frequency = freq)
-  if (!is.null(freq) && isTRUE(freq > 0)) {
-    tsbox::ts_ts(res)
+  if(is.null(data$frequency)) {
+    xts::xts(data$value, order.by = as.Date(data$time), frequency = NULL)
   } else {
-    res
+    ts(data$value, start = date_to_time(data$time[1]), frequency = data$frequency)
   }
 }
 
