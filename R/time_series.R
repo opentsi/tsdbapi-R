@@ -65,7 +65,8 @@ read_ts_history <- function(
     jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
   }
 
-  data <- jsonlite::fromJSON(httr2::resp_body_string(res), simplifyDataFrame = F)
+  batches <- split(ts_keys, ceiling(seq_along(ts_keys) / batch_size))
+  data <- unlist(lapply(batches, fetch_batch), recursive = F)
   names(data) <- purrr::map_chr(data, ~paste0(.x$ts_key, "_", stringr::str_replace_all(.x$vintage_date, "-", "")))
   lapply(data, json_to_ts)
 }
